@@ -1,0 +1,33 @@
+#!/bin/bash
+
+#
+Usage='lndir src [ dest ]'
+#
+# Creates a HARD links to the folder src in the folder dest (. by default)
+# 
+
+if [ $# -lt 1 ]; then
+	echo $Usage
+	exit
+fi
+
+src=$1
+
+dst=.
+[ $# -gt 1 ]&& dst=$2;
+
+srcname=$(echo $src | gawk -F/ '{print $NF}' )
+
+if [ -f "$src" ]; then
+	echo ln "'"$src"'" "'"$dst/$srcname"'"
+	exit
+fi
+
+echo mkdir "'"$dst/$srcname"'"
+
+IFS=$'\n'
+for f in $(ls -1 $src)
+do
+#	echo '['$srcname']' '<'$f'>'
+	lndir "$src/$f" "$dst/$srcname"
+done

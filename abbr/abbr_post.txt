@@ -1,0 +1,44 @@
+'', '']
+
+Abbreviations = {};
+
+Exceptions = {'JOURNAL OF THE AMERICAN CHEMICAL SOCIETY':'J. Am. Chem. Soc.',
+		'THE JOURNAL OF CHEMICAL PHYSICS':'J. Chem. Phys.'}
+
+for i in range(0,len(preAbbreviations),2):
+	abbr = preAbbreviations[i];
+	fullName = preAbbreviations[i+1];
+	Abbreviations[fullName.upper()]=abbr;
+	
+
+for s in f:
+	ss=s.split();
+	if len(ss)==0:
+		continue
+	if ss[0]!='journal' or ( not '}' in s ) :
+		print s
+	else:
+		sys.stdout.write('journal = {');
+ 		Name = getJournalName(s);
+		NameU = Name.upper();
+		if NameU in Exceptions:
+			sys.stdout.write(Exceptions[NameU]);
+		else: 
+			if NameU in Abbreviations:
+				sys.stdout.write(Abbreviations[NameU]);
+			else:
+				sys.stdout.write(Name);
+		print '},'		
+		#for s2 in ss[1:]:
+		#	w = leftAlpha(s2);
+		#	#print '##'+w
+		#	if w in Abbreviations:
+		#		sys.stdout.write(Abbreviations[w]);
+		#	else:
+		#		sys.stdout.write(w);
+		#	sys.stdout.write(' ');
+		#print '}';
+
+
+
+f.close();

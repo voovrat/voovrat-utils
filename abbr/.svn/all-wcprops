@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/fedorov/!svn/ver/239/Development/utils/abbr
+END
+make_abbr
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/fedorov/!svn/ver/239/Development/utils/abbr/make_abbr
+END
+abbrX.py
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/fedorov/!svn/ver/239/Development/utils/abbr/abbrX.py
+END
+abbr_names.txt
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/fedorov/!svn/ver/239/Development/utils/abbr/abbr_names.txt
+END
+abbr_post.txt
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/fedorov/!svn/ver/239/Development/utils/abbr/abbr_post.txt
+END
+abbr_pre.txt
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/fedorov/!svn/ver/239/Development/utils/abbr/abbr_pre.txt
+END
+coden.html
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/fedorov/!svn/ver/239/Development/utils/abbr/coden.html
+END

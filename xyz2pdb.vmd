@@ -1,0 +1,6 @@
+mol new {/usr/people/sergiiev/svn/Development/RISM-MODULES/SAMPL1_ru/input_data1/CUP08063.xyz} type {xyz} first 0 last -1 step 1 waitfor 1
+animate style Loop
+menu save on
+animate write pdb {/usr/people/sergiiev/svn/Development/RISM-MODULES/SAMPL1_ru/input_data1/CUP08063.pdb} beg 0 end 0 skip 1
+menu save off
+quit

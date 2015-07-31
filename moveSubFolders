@@ -1,0 +1,40 @@
+#!/bin/bash
+#  Volodymyr P Sergiievskyi, voov.rat@gmail.com
+#
+# Usage: moveSubFolders Path1 Path2 Folder Filter
+#  
+# moves all the files from Path1/Folder and its sub folders which satisies the Filter (grep Filter) to the Path2/Folde
+# the folder structure is preserved
+#
+# REQUIRED: createPath should exist and be in the PATH  
+
+
+Path1=$1
+Path2=$2
+Folder=$3
+Filter=$4
+
+S=$(find $Path1/$Folder | grep $Filter )
+
+mkdir $Path2/$Folder
+
+for file1 in $S
+do
+
+
+
+ 
+ file2=$(echo $file1 | sed "s:$Path1:$Path2:g" )
+
+Path=$(echo $file2 | tr / $'\n'  | head -n-1 | tr $'\n' /)
+File=$(echo $file2 | tr / $'\n'  | tail -n1 )
+
+ createPath $Path
+ mv $file1 $file2
+
+done
+
+
+
+
+

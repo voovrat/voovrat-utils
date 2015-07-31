@@ -1,0 +1,42 @@
+#!/bin/bash
+echo 'This script does the following:'
+echo '1) Takes txt file(e.g Guthrie.txt ), and splits it into the xyz files'
+echo '2) convert xyz to pdb using **VMD**'
+echo '3) assign OPLS2005 force field parameters using **MAESTRO**, and takes the coordinates from pdb to separate file'
+echo '4) run **MATLAB** script, which merges coordinates and force-field and put it into the DataSet'
+echo
+echo 'Usage:  ./convert_all [txt filename] [DataSet] [vmd command] [DataSetsPath]'
+echo
+echo 'Defaults:	[txt filename]  :  Guthrie.txt'
+echo '		[DataSet]	:  SAMPL1_ru'
+echo '		[vmd command]	:  vmd'
+echo '		[DataSetsPath]	:  /net/v215-2/data4/fedorov-group/Database/DataSets'
+echo
+
+DataSetsPath=/net/v215-2/data4/fedorov-group/Database/DataSets
+vmd_cmd=vmd
+DataSet=SAMPL1_ru
+txt_fname=Guthrie.txt
+
+[ $# -ge 4 ]&& DataSetsPath=$4;
+[ $# -ge 3 ]&& vmd_cmd=$3;
+[ $# -ge 2 ]&& DataSet=$2;
+[ $# -ge 1 ]&& txt_fname=$1;
+
+echo $# $txt_fname $DataSet $vmd_cmd $DataSetsPath
+
+# Split input file into separate xyz files. Example of the file format see in Guthrie.txt  
+cat $txt_fname | python split_xyz.py
+
+# Convert all xyz in the current folder to pdb (REQUIRES VMD to be installed!!)
+./xyz2pdb $vmd_cmd
+
+# Convert pdb to *.coors and *.opls files (REQUIRES SCHRODINGER/MAESTRO to be installed AND $SCHRODINGER env. variable to be set)
+./pdb2coorsOpls 
+
+# Run MATLAB(reqired to be installed) to compose the System files and to store them in the dataset
+#
+# ATTENTION!! to prevent a dublication in recortds dataset WILL BE DELETED PREVIOUSLY!!!
+rm -Rf $DataSetsPath/$DataSet
+matlab -r "coorsOpls2base('$DataSetsPath','$DataSet');quit" -nojvm
+

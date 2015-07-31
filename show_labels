@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ $# -lt 1 ]; then
+   echo show_labels file.xyz
+   exit
+fi
+
+echo "load $1; label %i" > jmol.cmd
+
+jmol -s jmol.cmd

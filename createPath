@@ -1,0 +1,34 @@
+#!/bin/bash
+#  Volodymyr P Sergiievskyi, voov.rat@gmail.com
+#
+#  create folder. If the path does not exists - creates the path
+#
+
+FullPath=$1
+
+L=${#FullPath}
+C=${FullPath:L-1:1}
+
+[ "$C" == / ]&& FullPath=${FullPath:0:L-1};
+
+[ -d "$FullPath" ]&& exit;
+
+Path=$(echo $FullPath | tr / $'\n'  | head -n-1 | tr $'\n' /)
+Folder=$(echo $FullPath | tr / $'\n'  | tail -n1 )
+
+#echo Path = $Path
+#echo Folder = $Folder
+
+if [ -d "$Path" ]; then
+ mkdir $FullPath
+ exit
+fi
+
+createPath "$Path"
+ mkdir "$FullPath" 
+
+
+
+
+
+

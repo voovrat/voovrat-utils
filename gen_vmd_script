@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo 'mol new {'$(pwd)/$1'.xyz} type {xyz} first 0 last -1 step 1 waitfor 1'
+echo 'animate style Loop'
+
+echo 'menu save on'
+echo 'animate write pdb {'$(pwd)/$1'.pdb} beg 0 end 0 skip 1'
+echo 'menu save off'
+
+echo 'quit'
+

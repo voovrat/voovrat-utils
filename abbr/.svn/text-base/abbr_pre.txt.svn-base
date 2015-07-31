@@ -1,0 +1,22 @@
+import sys;
+
+f=open(sys.argv[1]);
+
+def leftAlpha(s):
+	s2='';
+	for i in range(0,len(s)):
+		if s[i]>='A' and s[i]<='Z' or s[i]>='a' and s[i]<='z':
+			s2=s2+s[i];
+
+	return s2;
+
+def getJournalName(s):
+	beg=0; end=0;
+	for i in range(0,len(s)):
+		if s[i]=='{': 
+			beg = i;
+		if s[i]=='}':
+			end=i;
+	return s[beg+1:end].strip();
+
+preAbbreviations = [

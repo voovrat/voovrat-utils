@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Usage:   rism2xyz  molecule.rism  molecule.atomnames  > molecule.xyz
+
+
+cat $1 | grep '[0-9]' | wc -l  # N
+echo $1 | gawk -F . '{print $1}'
+cat $1 | gawk '{print $1"   " $2"   " $3}' > xyz.tmp
+multicol $2 xyz.tmp
+
+
+
+
+

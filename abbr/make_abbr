@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cat coden.html | grep '<tr><td align=left><font face="Arial" size=2>' | tr "<" ">" | gawk -F '>' -v q='"' '{print q $7 q ","  q $13 q "," }' | tr -cd 'A-Za-z0-9 \n",.&'  > abbr_names.txt  
+
+cat abbr_pre.txt abbr_names.txt abbr_post.txt > abbrX.py
+

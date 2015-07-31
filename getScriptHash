@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+# gets the hash code of a script command line
+#
+
+A=$(cat $(which $1) | getHash)
+B=$(echo $* | getHash )
+
+echo $((A+B))
+

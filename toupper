@@ -1,0 +1,2 @@
+#!/bin/bash
+echo 'print "'$1'".upper()' | python

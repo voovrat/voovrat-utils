@@ -1,0 +1,3 @@
+#!/bin/bash
+$SCHRODINGER/utilities/ffld_server -ipdb $1 -print_parameters | grep "OPLSAA FORCE FIELD TYPE ASSIGNED" -A 100 | tail -n+5 | grep Stretch -B 100 | head -n -4 
+

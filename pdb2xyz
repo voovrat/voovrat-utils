@@ -1,0 +1,5 @@
+import sys;
+
+if sys.argc<3:
+	print 'Usage:  python pdb2xyz.py <input.pdb> <'
+

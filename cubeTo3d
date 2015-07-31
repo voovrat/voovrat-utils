@@ -1,0 +1,50 @@
+#!/bin/bash
+#
+#  cubeTo3d input.cube 
+# 
+#  Convert the cube file to the 3d file (rism format)
+#
+#  creates files input.3d  input_X.grd  input_Y.grd input_Z.grd
+#
+
+
+N=$(head -n3 $1 | tail -n1 | gawk '{print $1}' )
+
+Nx=$(head -n4 $1 | tail -n1 | gawk '{print $1}' )
+Ny=$(head -n5 $1 | tail -n1 | gawk '{print $1}' )
+Nz=$(head -n6 $1 | tail -n1 | gawk '{print $1}' )
+
+dx=$(head -n4 $1 | tail -n1 | gawk '{print $2}' )
+dy=$(head -n5 $1 | tail -n1 | gawk '{print $3}' )
+dz=$(head -n6 $1 | tail -n1 | gawk '{print $4}' )
+
+fname=$(echo $1 | tr . $'\n' | head -n-1 | tr $'\n' .)
+L=${#fname}
+name=${fname:0:L-1}
+
+rm -f ${name}_X.grd
+rm -f ${name}_Y.grd
+rm -f ${name}_Z.grd
+
+
+for((i=-Nx/2;i<Nx/2;i++))
+do 
+	x=$( echo "scale=6;$i*$dx" | bc )
+	echo $x >> ${name}_X.grd
+done
+
+for((i=-Ny/2;i<Ny/2;i++))
+do 
+	y=$( echo "scale=6;$i*$dy" | bc )
+	echo $y >> ${name}_Y.grd
+done
+
+for((i=-Nz/2;i<Nz/2;i++))
+do 
+	z=$( echo "scale=6;$i*$dz" | bc )
+	echo $z >> ${name}_Z.grd
+done
+
+
+tail $1 -n+$((7+$N)) > ${name}.3d
+

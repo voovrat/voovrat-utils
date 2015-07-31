@@ -1,0 +1,31 @@
+#!/bin/bash
+#
+#  rism2mdft input.rism
+#  rism2mdft convert rism input to mdft input
+#
+
+
+N=$(cat $1 | wc -l)
+
+rm -f count.tmp zero.tmp 2>/dev/null
+touch count.tmp zero.tmp
+
+
+for((i=1;i<=$N;i++))
+do
+  echo $i >> count.tmp
+  echo 0 >> zero.tmp
+done
+
+cat $1 | gawk '{print $1" "$2" "$3 }' > xyz.tmp
+cat $1 | gawk '{print $4 }' >sigma.tmp
+cat $1 | gawk '{print $5*4.184 }' >epsilon.tmp
+cat $1 | gawk '{print $6 }' >charge.tmp
+
+
+
+echo $1
+echo $N $N
+#echo '#' This is a comment line which is absolutely necessary as a part of mdft format 
+echo '#count charge sigma epsilon  lambda1 lambda2 x y z  Z Name Surname'
+multicol count.tmp charge.tmp sigma.tmp epsilon.tmp zero.tmp zero.tmp xyz.tmp count.tmp count.tmp count.tmp

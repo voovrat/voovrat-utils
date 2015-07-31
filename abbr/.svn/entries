@@ -1,0 +1,89 @@
+8
+
+dir
+239
+http://triton.mis.mpg.de/svn/fedorov/Development/utils/abbr
+http://triton.mis.mpg.de/svn/fedorov
+
+
+
+2010-05-03T16:20:50.528667Z
+239
+sergiiev
+
+
+svn:special svn:externals svn:needs-lock
+
+make_abbr
+file
+
+
+
+
+2010-05-03T16:18:42.000000Z
+1edfaeecd49d74f119f13ae863b7d4e1
+2010-05-03T16:20:50.528667Z
+239
+sergiiev
+has-props
+
+abbrX.py
+file
+
+
+
+
+2010-05-03T16:20:27.000000Z
+974883e4afcf817f1a421c8db45139cb
+2010-05-03T16:20:50.528667Z
+239
+sergiiev
+
+abbr_names.txt
+file
+
+
+
+
+2010-05-03T16:20:27.000000Z
+ff4a14ce2c1b53648b2712aa93b49d07
+2010-05-03T16:20:50.528667Z
+239
+sergiiev
+
+abbr_post.txt
+file
+
+
+
+
+2010-05-03T16:18:42.000000Z
+7a68a345ef70479236b2eb0ca7789591
+2010-05-03T16:20:50.528667Z
+239
+sergiiev
+
+abbr_pre.txt
+file
+
+
+
+
+2010-05-03T16:18:42.000000Z
+84c7d9197104a189ffe983d394a41eb6
+2010-05-03T16:20:50.528667Z
+239
+sergiiev
+
+coden.html
+file
+
+
+
+
+2010-05-03T16:20:22.000000Z
+52c3bdd1ba7af7c9b762099a88c53906
+2010-05-03T16:20:50.528667Z
+239
+sergiiev
+

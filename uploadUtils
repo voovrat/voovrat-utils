@@ -1,0 +1,36 @@
+#!/bin/bash
+
+N=$(which sshpass | wc -l)
+
+if [ $N == 0  ]; then
+
+echo "please, install sshpass"
+echo "you can do it: sudo apt-get install sshpass"
+echo "or download from http://sourceforge.net/projects/sshpass/ "
+
+exit
+
+fi
+
+
+if [ $# -lt 2 ]; then
+
+echo "Usage:  uploadUtils  server remote_location password_file"
+exit
+
+fi
+
+server=$1
+location=$2
+password_file=$3
+
+
+cd $UTILS_PATH/..
+
+t=$(date +%Y-%m-%d_%H.%M)
+
+tar -cf utils_$t.tar utils
+gzip utils_$t.tar
+
+sshpass -f $password_file scp utils_$t.tar.gz $server:$remote_location
+sshpass -f $password_file ssh $server "cd $remote_location; tar -xzf utils_$t.tar.gz; cd utils; ./utils_setupPaths"

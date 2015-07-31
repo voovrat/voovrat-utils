@@ -1,0 +1,72 @@
+#!/bin/bash
+
+if [ $# -lt 2 ]; then
+   echo "usage: parsebib  textwithtags.txt  tagname path_to_pdf "
+   echo "creates a bibtex file form the textwith tags"
+   echo "tags look like  %AUTHOR ... @, %TITLE .... @ end so on"
+   exit
+fi
+
+
+cat $1 | sed 's:%\([A-Z]*\):#%\1:g' | tr '#' $'\n' > tmp
+
+DOI=$(cat tmp | grep %DOI -A 100 | tr '@'$'\n'  $'\n'' ' | head -n1 | tr  ' ' $'\n' | grep '[0-9]' )
+
+
+Title0=$(cat tmp | grep %T -A 100 | tr '@'$'\n'  $'\n'' ' | head -n1 | sed 's:%T\([A-Z]*\)::g' )
+
+Title=$( echo $Title0 | sed 's:\([A-Z]\):{\1}:g')
+
+
+Authors0=$(cat tmp | grep %AU -A 100 | tr '@'$'\n'  $'\n'' ' | head -n1 | sed 's:%AU\([A-Z]*\)::g' | tr -d -c '[A-Za-z] ,' )
+
+Authors1=$(echo $Authors0 | sed 's: and :,:g' | tr ', ' ' '@ )
+
+Authors=''
+for auth in $Authors1
+do
+   if [ -n "$auth" ]; then
+      LastName=$(echo $auth | gawk -F@ '{print $NF}')
+      FirstName=$(echo $auth | sed s:$LastName::g | tr @ ' ')
+      Authors=$Authors$LastName', '$FirstName' and '
+   fi
+done  
+
+NN=${#Authors}
+Authors=${Authors:0:$NN-5}  # remove the last and
+
+
+
+Page0=$(cat tmp | grep %P -A 100 | tr '@'$'\n'  $'\n'' ' | head -n1 | tr -c [0-9] ' ' )
+
+Pgfrom=$(echo $Page0 | gawk '{print $1}')
+Pgto=$(echo $Page0 | gawk '{print $2}')
+
+if [ -z "$Pgto" ]; then
+   Page=$Pgfrom
+else
+   Page=$Pgfrom-$Pgto
+fi
+
+Vol=$(cat tmp | grep %V -A 100 | tr '@'$'\n'  $'\n'' ' | head -n1 | tr -d -c [0-9]  )
+
+Year=$(cat tmp | grep %Y -A 100 | tr '@'$'\n'  $'\n'' ' | head -n1 | tr -d -c [0-9] )
+
+Journal=$(cat tmp | grep %J -A 100 | tr '@''\n' $'\n'' ' | head -n1 | sed 's:%J\([A-Z]*\)::g' )
+
+first_author=$(echo $Authors | gawk -F , '{print $1}')
+
+echo "@article{${first_author}_${Year}_$2,"
+echo 'title = {'$Title'},'
+echo 'author = {'$Authors'},'
+echo 'journal = {'$Journal'},'
+echo 'pages = {'$Page'},'
+echo 'volume ={'$Vol'},'
+echo 'year= {'$Year'},'
+[ -n "$DOI" ] && echo 'doi= {'$DOI'},'
+
+NF=${#1}
+PDF=${1:0:$NF-4}.pdf
+echo 'file= {:'$3$PDF':PDF}' 
+echo '}'
+

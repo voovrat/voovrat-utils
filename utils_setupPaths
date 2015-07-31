@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [ -z "$UTILS_PATH" ]; then
+
+#  echo "AAAAAAAAAAAAAAAAAAAAAAAAAA"
+
+   export UTILS_PATH=$(pwd)
+   export PATH=$PATH:$(pwd)
+   export PYTHONPATH=$PYTHONPATH:$(pwd)
+
+fi
+
+N=$( cat ~/.bashrc | grep UTILS_PATH | wc -l )
+
+
+if [ $N == 0 ]; then
+
+
+echo export UTILS_PATH=$(pwd) >> ~/.bashrc
+echo export PATH='$PATH:$UTILS_PATH' >> ~/.bashrc
+echo export 'PYTHONPATH=$PYTHONPATH:$UTILS_PATH' >> ~/.bashrc
+
+fi

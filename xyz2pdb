@@ -1,0 +1,21 @@
+#!/bin/bash
+
+echo Converts ALL *.xyz files in the current folder to *.pdb using VMD
+echo Usage:   ./xyzpdb  [command to run vmd]
+echo Default:  command to run vmd=vmd
+
+if [ $# -lt 1 ];
+then
+	vmd=vmd #/opt/local/vmd-1.8.7beta5/bin/vmd
+else
+	vmd=$1
+fi
+
+for i in $(ls *.xyz)
+do
+    name=${i:0:${#i}-4}
+    echo $name
+    ./gen_vmd_script $name > xyz2pdb.vmd
+    $vmd -e xyz2pdb.vmd -eofexit -dispdev none >/dev/null 2>/dev/null
+done
+

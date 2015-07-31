@@ -1,0 +1,13 @@
+export PATH=$PATH:$UTILS_PATH
+export UTILS_PATH=/home/voovrat/Desktop/Development/utils
+export PATH=$PATH:$UTILS_PATH
+export UTILS_PATH=/home/voovrat/Desktop/Development/utils
+export PATH=$PATH:$UTILS_PATH
+export UTILS_PATH=/home/voovrat/Desktop/Development/utils
+export PATH=$PATH:$UTILS_PATH
+export UTILS_PATH=/home/voovrat/Desktop/Development/utils
+export PATH=$PATH:$UTILS_PATH
+export UTILS_PATH=/home/voovrat/Desktop/Development/utils
+export PATH=$PATH:$UTILS_PATH
+export UTILS_PATH=/home/voovrat/Desktop/Development/utils
+export PATH=$PATH:$UTILS_PATH
