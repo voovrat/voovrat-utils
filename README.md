@@ -15,3 +15,6 @@ There should 3 more lines like export $PATH=$PATH:$UTILS_PATH appear
 But be careful:  some ~/.bashrc files do not execute the commands at the end of the file if the shell is non-interactive.
 If it is your case - modify ~/.bashrc by hand just to be sure that the new 'export' lines are executed in each variant of shell start.
 
+also, the file modifies ~/.octaverc
+check, that it is correct before running enything
+
