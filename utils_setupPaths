@@ -21,3 +21,15 @@ echo export PATH='$PATH:$UTILS_PATH' >> ~/.bashrc
 echo export 'PYTHONPATH=$PYTHONPATH:$UTILS_PATH' >> ~/.bashrc
 
 fi
+
+N=$( cat ~/.octaverc | grep UTILS_PATH | wc -l)
+
+if [ $N == 0 ]; then
+
+   echo 'path(path,"'$(pwd)'");' >> ~/.octaverc
+
+fi
+
+
+
+
