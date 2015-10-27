@@ -11,8 +11,9 @@ atoms=cell(nlin,1);
 for i=1:nlin
 
   s = fgets(f);
-  words=strsplit(s);
-  atoms(i) = words{1};
+  words=strsplit(strtrim(s));
   XYZ(i,:) = [ str2num(words{2}) str2num(words{3}) str2num(words{4}) ];
+  atoms{i} = words{1};
+
 
 end
