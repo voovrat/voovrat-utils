@@ -2,7 +2,7 @@
 
 if [ -z "$UTILS_PATH" ]; then
 
-#  echo "AAAAAAAAAAAAAAAAAAAAAAAAAA"
+  echo "AAAAAAAAAAAAAAAAAAAAAAAAAA"
 
    export UTILS_PATH=$(pwd)
    export PATH=$PATH:$(pwd)
