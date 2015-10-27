@@ -10,12 +10,19 @@ A1 = double(A0);
 Mx = max(max(max(A1)));
 
 if Mx<2
-   A = A1;
-   alpha = double(alpha0);
+   F = 1;
 else
-   A = A1/255;
-   alpha = double(alpha0)/255;
+   F = 255;
 end
+
+A = A1/F;
+
+if sum(size(alpha0))==0
+   alpha = ones(size(A0,1),size(A0,2));
+else
+   alpha = double(alpha0)/F;
+end
+
 
 [m,n,k] = size(A);
 
