@@ -22,7 +22,12 @@ echo export 'PYTHONPATH=$PYTHONPATH:$UTILS_PATH' >> ~/.bashrc
 
 fi
 
-N=$( cat ~/.octaverc | grep UTILS_PATH | wc -l)
+
+if [ -n ~/.octaverc ]; then
+  N=0
+else 
+  N=$( cat ~/.octaverc | grep UTILS_PATH | wc -l)
+fi
 
 if [ $N == 0 ]; then
 
