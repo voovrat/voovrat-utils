@@ -1,8 +1,23 @@
-gx=load('mol_in_water_X.grd');
-gy=load('mol_in_water_Y.grd');
-gz=load('mol_in_water_Z.grd');
+function plot_distr(prefix,output)
+%
+%  plot_distr(prefix,output)
+%
+%  converts 3d distribution to tricolor file (which can be then used as input for illuinate)  
 
-g0=load('mol_in_water_g0.3d');
+
+if nargin<1
+  prefix='mol_in_water_';
+end
+
+if nargin<2
+  output = 'dens.tricolor'
+end
+
+gx=load([ prefix 'X.grd' ]);
+gy=load([ prefix 'Y.grd' ]);
+gz=load([ prefix 'Z.grd' ]);
+
+g0=load([ prefix 'g0.3d' ]);
 
 [g3,GX,GY,GZ]=prepareToSlice(g0,gx,gy,gz,{'z','y','x'});
 
@@ -17,7 +32,7 @@ K = unit2unit(DU,'Bohr','Angstr');
 dx = (GX(2)-GX(1) ) * K;
 dy = (GY(2) - GY(1) )*K;
 
-f=fopen('dens.tricolor','w');
+f=fopen(output,'w');
 
 z0 = GZ(mz) + 10;
 
