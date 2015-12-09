@@ -73,7 +73,7 @@ for j=1:2*mx
       g=1;
       b = 4 - val;
 
-   elseif
+   elseif val<5
 
       r = 1;
       g = 5-val;
