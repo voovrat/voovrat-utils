@@ -9,7 +9,7 @@
 //
 //  what you would need to define:
 //    - in your Class property<Class,Type> variable;  where type is a type of your property
-//    - define usual getters/setters (like Type getX() and void setX( Type x)
+//    - define usual getters/setters (like Type getX() const and void setX( Type x)
 //    - In the constructor initialize your property like 
 //             : x(  this, getX,  setX )
 //
@@ -23,12 +23,12 @@ class property {
 public:
 
 	
-	typedef Type (Base::*GetFn)() ;
-	typedef void (Base::*SetFn)(Type);
+	typedef Type (Base::*GetFn)() const ;
+	typedef void (Base::*SetFn)(Type );
 
 	Base *obj;
-	Type (Base::*get)();
-        void (Base::*set)(Type x);
+	GetFn get;
+        SetFn set;
 
 
 
@@ -41,7 +41,7 @@ public:
 
 
 
-	operator Type() {
+	operator Type() const {
 	{
            if( obj && get ) 
 		   return (obj->*get)();
@@ -52,7 +52,7 @@ public:
 
 	}
 
-	Type operator=( Type y) {
+	Type operator=( Type y) const {
 	   if( obj && set ) {
      		(obj->*set)(y);
 		return y;
@@ -76,7 +76,7 @@ class B {
 
     property<B,double> z;
     
-    double getZ() {return 3.333; }
+    double getZ() const {return 3.333; }
 
     void setZ( double X) 
     { 	     
