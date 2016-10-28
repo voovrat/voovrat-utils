@@ -41,7 +41,7 @@ public:
 
 
 
-	operator Type() const {
+	operator Type() const 
 	{
            if( obj && get ) 
 		   return (obj->*get)();
