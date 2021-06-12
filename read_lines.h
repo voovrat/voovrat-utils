@@ -19,10 +19,22 @@ void read_lines( std::istream &fs,std::vector<std::string> &lines,const std::set
 void read_lines( std::istream &fs, std::vector<std::string> &lines);
 
 
-void split_words(const std::string &str,std::vector<std::string> &words);
+void split_words( const std::string &str,std::vector<std::string> &words);
+
+// split words using delims from string ( runs the function below)
+void split_words( const std::string &str, const std::string &delim, std::vector<std::string> &words );
+
 
 //split words using the given set of delimeters
-void split_words(const std::string &str, std::vector<std::string> &words,const std::set<char> &delim);
+void split_words( const std::string &str, std::vector<std::string> &words,const std::set<char> &delim);
+
+#if __cplusplus >= 201103L
+
+  std::vector<std::string> split_words( const std::string &str );
+  std::vector<std::string> split_words( const std::string &str, const std::string & delim );
+
+#endif
+
 
 
 

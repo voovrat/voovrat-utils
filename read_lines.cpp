@@ -184,6 +184,37 @@ void split_words(const string &str,vector<string> &words)
 }
 
 
+void split_words( const std::string &str, const std::string &delim, std::vector<std::string> &words )
+{
+  set<char> delim_set;
+  int n  = delim.size();
+  for( int i=0; i<n; i++ )
+    delim_set.insert( delim[i]);
+
+  split_words(str,words, delim_set );
+}
+
+#if __cplusplus >= 201103L
+
+std::vector<std::string> split_words( const std::string &str )
+{
+    std::vector<std::string > res;
+    split_words( str, res );
+    return res;
+}
+
+std::vector<std::string> split_words( const std::string &str, const std::string & delim )
+{
+    std::vector<std::string> res;
+    split_words( str, delim, res );
+    return res;
+}
+
+#endif
+
+
+
+
 void split_words(const string &str, vector<string> &out_words,const set<char> &delim)
 {
    char *str_chars;

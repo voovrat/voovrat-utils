@@ -11,15 +11,16 @@ maxcol = 3-0.001;
 
 H = sum(B);
 
-for l=1:n
+for l=2:n
    if H(l)<m*maxcol
       break
    end
 end
+
 l=l-1;
 
 
-for r=n:-1:1
+for r=n-1:-1:1
    if H(r)<m*maxcol
       break
    end
@@ -28,7 +29,7 @@ r=r+1;
 
 V = sum(B');
 
-for t=1:m
+for t=2:m
    if V(t)<n*maxcol
       break
    end
@@ -36,7 +37,7 @@ end
 t=t-1;
 
 
-for b=m:-1:1
+for b=m-1:-1:1
    if V(b)<n*maxcol
       break
    end
